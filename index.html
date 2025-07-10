@@ -1,821 +1,1054 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Sajida Khan - Front-End Developer, QA Engineer, and Global Coding Mentor with over 14 years of experience.">
-  <meta name="author" content="Sajida Khan">
-  <title>Sajida Khan — Front-End Developer & QA Mentor</title>
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23F472B6'/%3E%3Ctext x='50' y='60' font-family='Menbere, sans-serif' font-size='30' font-weight='700' fill='%23F1F5F9' text-anchor='middle'%3ESK%3C/text%3E%3C/svg%3E" />
-
-  <!-- Tailwind CSS (Local Build) -->
-  <link href="./dist/output.css" rel="stylesheet">
-
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
-  <!-- Google Fonts (Menbere and Roboto) -->
-  <link href="https://fonts.googleapis.com/css2?family=Menbere:wght@100;200;300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-
-  <style>
-    body { font-family: 'Roboto', sans-serif; background: linear-gradient(135deg, #1E40AF 0%, #7E22CE 100%); color: #F1F5F9; }
-    h1, h2, h3, h4 { font-family: 'Menbere', sans-serif; font-weight: 700; }
-    .gradient-text { background: linear-gradient(90deg, #F472B6, #A78BFA); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .glass { 
-      background: rgba(255,255,255,0.15); 
-      backdrop-filter: blur(20px); 
-      border: 1px solid rgba(255,255,255,0.3); 
-      border-radius: 2.5rem; 
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .glass:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.4); }
-    .section { padding: 8rem 1rem; }
-    img.avatar { border-radius: 9999px; width: 64px; height: 64px; object-fit: cover; border: 3px solid #F472B6; transition: transform 0.3s ease; }
-    img.avatar:hover { transform: scale(1.1); }
-    .nav-link { transition: color 0.3s ease, transform 0.3s ease; }
-    .nav-link:hover { color: #F472B6; transform: scale(1.1); }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-    .hamburger span { width: 28px; height: 3px; background: #F1F5F9; border-radius: 3px; transition: all 0.3s ease; }
-    .mobile-menu { transition: transform 0.3s ease; }
-    .logo-svg { width: 40px; height: 40px; transition: transform 0.3s ease; }
-    .logo-svg:hover { transform: rotate(10deg); }
-    .project-img, .blog-img { transition: transform 0.3s ease, filter 0.3s ease; border-radius: 1.5rem; }
-    .project-img:hover, .blog-img:hover { transform: scale(1.05); filter: brightness(1.15); }
-    .decorative { position: absolute; opacity: 0.15; pointer-events: none; }
-    .testimonials-carousel { overflow: hidden; position: relative; }
-    .testimonials-track { display: flex; transition: transform 0.5s ease; }
-    .sparkle { position: absolute; width: 12px; height: 12px; background: #F472B6; border-radius: 50%; animation: sparkle 2.5s infinite; }
-    @keyframes sparkle {
-      0% { transform: scale(0); opacity: 0.9; }
-      50% { transform: scale(1.8); opacity: 0.4; }
-      100% { transform: scale(0); opacity: 0; }
-    }
-    .btn { transition: all 0.3s ease; }
-    .btn:hover { transform: scale(1.05); }
-    @media (max-width: 768px) {
-      .hamburger { display: flex; }
-      .mobile-menu { transform: translateX(100%); }
-      .mobile-menu.active { transform: translateX(0); }
-    }
-  </style>
-</head>
-
-<body>
-  <!-- Navbar -->
-  <nav class="fixed w-full top-0 z-50 bg-black bg-opacity-50 backdrop-blur-lg" aria-label="Main navigation">
-    <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
-      <a href="/" aria-label="Sajida Khan Portfolio Home">
-        <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="50" cy="50" r="40" fill="url(#grad)" />
-          <text x="50" y="60" font-family="Menbere, sans-serif" font-size="30" font-weight="700" fill="#F1F5F9" text-anchor="middle">SK</text>
-          <defs>
-            <linearGradient id="grad" x1="0" y1="0" x2="100" y2="100">
-              <stop offset="0%" style="stop-color:#F472B6" />
-              <stop offset="100%" style="stop-color:#A78BFA" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </a>
-      <div class="hidden md:flex gap-8">
-        <a href="#about" class="nav-link font-medium text-lg">About</a>
-        <a href="#skills" class="nav-link font-medium text-lg">Skills</a>
-        <a href="#projects" class="nav-link font-medium text-lg">Projects</a>
-        <a href="#blog" class="nav-link font-medium text-lg">Blog</a>
-        <a href="#testimonials" class="nav-link font-medium text-lg">Testimonials</a>
-        <a href="#contact" class="nav-link font-medium text-lg">Contact</a>
-      </div>
-      <div class="hamburger md:hidden" aria-label="Toggle mobile menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-    <!-- Mobile Menu -->
-    <div class="mobile-menu md:hidden fixed top-16 right-0 w-3/4 max-w-xs bg-black bg-opacity-90 backdrop-blur-lg h-full p-6">
-      <div class="flex flex-col gap-4">
-        <a href="#about" class="nav-link font-medium text-lg">About</a>
-        <a href="#skills" class="nav-link font-medium text-lg">Skills</a>
-        <a href="#projects" class="nav-link font-medium text-lg">Projects</a>
-        <a href="#blog" class="nav-link font-medium text-lg">Blog</a>
-        <a href="#testimonials" class="nav-link font-medium text-lg">Testimonials</a>
-        <a href="#contact" class="nav-link font-medium text-lg">Contact</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero -->
-  <section id="hero" class="section flex flex-col justify-center items-center min-h-screen pt-24 text-center bg-gradient-to-b from-transparent to-black/30 relative overflow-hidden">
-    <svg class="decorative w-64 h-64 top-10 left-10" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M50 20c-16.5 0-30 13.5-30 30s13.5 30 30 30 30-13.5 30-30-13.5-30-30-30zm0 50c-11 0-20-9-20-20s9-20 20-20 20 9 20 20-9 20-20 20z" fill="#F472B6"/>
-    </svg>
-    <svg class="decorative w-48 h-48 bottom-20 right-10" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M50 20c-16.5 0-30 13.5-30 30s13.5 30 30 30 30-13.5 30-30-13.5-30-30-30zm0 50c-11 0-20-9-20-20s9-20 20-20 20 9 20 20-9 20-20 20z" fill="#A78BFA"/>
-    </svg>
-    <div class="mb-6">
-      <svg class="w-20 h-20" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="40" fill="url(#grad)" />
-        <text x="50" y="60" font-family="Menbere, sans-serif" font-size="30" font-weight="700" fill="#F1F5F9" text-anchor="middle">SK</text>
-        <defs>
-          <linearGradient id="grad" x1="0" y1="0" x2="100" y2="100">
-            <stop offset="0%" style="stop-color:#F472B6" />
-            <stop offset="100%" style="stop-color:#A78BFA" />
-          </linearGradient>
-        </defs>
-      </svg>
-    </div>
-    <h1 class="text-5xl md:text-7xl font-bold mb-6 gradient-text">Sajida Khan</h1>
-    <p class="max-w-3xl text-xl md:text-2xl mb-8 leading-relaxed">
-      Front-End Developer, QA Automation Expert, and Global Coding Mentor. Crafting beautiful web experiences, ensuring quality, and inspiring 10,000+ learners worldwide.
-    </p>
-    <div class="flex gap-4">
-      <a href="#contact" class="btn inline-block px-8 py-3 bg-pink-500 rounded-full hover:bg-pink-600 font-medium">Get in Touch</a>
-      <a href="#projects" class="btn inline-block px-8 py-3 border border-pink-500 rounded-full hover:bg-pink-500 font-medium">View Projects</a>
-    </div>
-  </section>
-
-  <!-- About -->
-  <section id="about" class="section max-w-7xl mx-auto relative">
-    <svg class="decorative w-40 h-40 top-20 left-0" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M50 20c-16.5 0-30 13.5-30 30s13.5 30 30 30 30-13.5 30-30-13.5-30-30-30zm0 50c-11 0-20-9-20-20s9-20 20-20 20 9 20 20-9 20-20 20z" fill="#F472B6"/>
-    </svg>
-    <h2 class="text-4xl md:text-5xl font-bold mb-6">About Me</h2>
-    <div class="grid md:grid-cols-2 gap-8">
-      <div>
-        <p class="mb-4 text-lg leading-relaxed">
-          I’m Sajida Khan, a passionate front-end developer and QA automation expert with over 14 years of experience creating delightful, user-friendly web applications.
-        </p>
-        <p class="mb-4 text-lg leading-relaxed">
-          My journey began as a curious teen coding fun projects, leading to a career at TrueTech, where I built complex SaaS dashboards, streamlined CI/CD pipelines, and crafted reusable React components.
-        </p>
-        <p class="mb-4 text-lg leading-relaxed">
-          As a global mentor, I’ve empowered over 10,000 students across 20+ countries through engaging bootcamps and personalized mentorships, helping them launch dream tech careers.
-        </p>
-        <p class="text-lg leading-relaxed">
-          When I’m not coding, I’m exploring AI, designing automation scripts, and sharing tech tips on my blog. My goal is to make technology fun, accessible, and inspiring for all!
-        </p>
-      </div>
-      <div class="glass p-6">
-        <h3 class="text-2xl font-semibold mb-4">Quick Facts</h3>
-        <ul class="list-disc list-inside text-lg space-y-2">
-          <li>14+ years in front-end & QA automation</li>
-          <li>Mentored 10,000+ students globally</li>
-          <li>Expert in React, Next.js, and Selenium</li>
-          <li>Passionate about AI and fun tech education</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Skills -->
-  <section id="skills" class="section max-w-7xl mx-auto">
-    <h2 class="text-4xl md:text-5xl font-bold mb-8">Skills</h2>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-      <div class="glass p-6"><h3 class="text-xl font-semibold mb-2">React.js</h3><p>Reusable components, Hooks, Context, Next.js.</p></div>
-      <div class="glass p-6"><h3 class="text-xl font-semibold mb-2">Next.js</h3><p>SSR, static sites, API routes, Vercel.</p></div>
-      <div class="glass p-6"><h3 class="text-xl font-semibold mb-2">Tailwind CSS</h3><p>Responsive UI, design systems, dark mode.</p></div>
-      <div class="glass p-6"><h3 class="text-xl font-semibold mb-2">Selenium</h3><p>Automated UI tests, cross-browser suites.</p></div>
-      <div class="glass p-6"><h3 class="text-xl font-semibold mb-2">Python</h3><p>Scripting, automation, data pipelines.</p></div>
-      <div class="glass p-6"><h3 class="text-xl font-semibold mb-2">CI/CD</h3><p>GitHub Actions, Jenkins, deployments.</p></div>
-      <div class="glass p-6"><h3 class="text-xl font-semibold mb-2">Git & GitHub</h3><p>Version control, branching, PRs.</p></div>
-      <div class="glass p-6"><h3 class="text-xl font-semibold mb-2">API Testing</h3><p>Postman, REST, GraphQL, JSON.</p></div>
-      <div class="glass p-6"><h3 class="text-xl font-semibold mb-2">Chatbots</h3><p>Dialogflow, OpenAI API, NLP.</p></div>
-      <div class="glass p-6"><h3 class="text-xl font-semibold mb-2">SQL/NoSQL</h3><p>MySQL, MongoDB, data modeling.</p></div>
-      <div class="glass p-6"><h3 class="text-xl font-semibold mb-2">Mentoring</h3><p>Training juniors, code reviews.</p></div>
-      <div class="glass p-6"><h3 class="text-xl font-semibold mb-2">TypeScript</h3><p>Type-safe JavaScript, interfaces.</p></div>
-    </div>
-  </section>
-
-  <!-- Projects -->
-  <section id="projects" class="section max-w-7xl mx-auto relative">
-    <svg class="decorative w-48 h-48 bottom-10 right-0" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M50 20c-16.5 0-30 13.5-30 30s13.5 30 30 30 30-13.5 30-30-13.5-30-30-30zm0 50c-11 0-20-9-20-20s9-20 20-20 20 9 20 20-9 20-20 20z" fill="#A78BFA"/>
-    </svg>
-    <h2 class="text-4xl md:text-5xl font-bold mb-8">Projects</h2>
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="glass p-6">
-        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="EduPlatform" class="project-img mb-4">
-        <h3 class="text-xl font-semibold mb-2">EduPlatform</h3>
-        <p class="mb-4">A vibrant e-learning platform with React, Node.js, and Stripe for secure payments.</p>
-        <a href="#project-details-1" class="text-pink-400 hover:underline">View Details</a>
-      </div>
-      <div class="glass p-6">
-        <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="QA Suite" class="project-img mb-4">
-        <h3 class="text-xl font-semibold mb-2">QA Automation Suite</h3>
-        <p class="mb-4">Selenium-based test framework for enterprise portals, integrated with CI/CD.</p>
-        <a href="#project-details-2" class="text-pink-400 hover:underline">View Details</a>
-      </div>
-      <div class="glass p-6">
-        <img src="https://images.unsplash.com/photo-1516321310762-47943772f58e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Portfolio Website" class="project-img mb-4">
-        <h3 class="text-xl font-semibold mb-2">Portfolio Website</h3>
-        <p class="mb-4">A playful, animated personal site with GSAP, Tailwind CSS, and custom SVGs.</p>
-        <a href="#project-details-3" class="text-pink-400 hover:underline">View Details</a>
-      </div>
-    </div>
-    <!-- Detailed Projects Section -->
-    <div id="project-details" class="mt-12">
-      <h3 class="text-3xl font-semibold mb-6">Project Details</h3>
-      <div id="project-details-1" class="glass p-6 mb-6">
-        <h4 class="text-2xl font-semibold mb-4">EduPlatform</h4>
-        <p class="mb-4">Built an interactive e-learning platform with React, Node.js, and MongoDB. Integrated Stripe for secure payments and implemented real-time quizzes using WebSockets.</p>
-        <p>Technologies: React, Node.js, MongoDB, Stripe, WebSockets</p>
-      </div>
-      <div id="project-details-2" class="glass p-6 mb-6">
-        <h4 class="text-2xl font-semibold mb-4">QA Automation Suite</h4>
-        <p class="mb-4">Developed a comprehensive Selenium-based automation framework for testing enterprise portals, reducing manual testing time by 70%. Integrated with Jenkins for CI/CD.</p>
-        <p>Technologies: Selenium, Python, Jenkins, Docker</p>
-      </div>
-      <div id="project-details-3" class="glass p-6 mb-6">
-        <h4 class="text-2xl font-semibold mb-4">Portfolio Website</h4>
-        <p class="mb-4">Designed a responsive, animated portfolio site showcasing my work, using GSAP for animations, Tailwind CSS for styling, and custom SVG logos for branding.</p>
-        <p>Technologies: HTML, Tailwind CSS, GSAP, JavaScript</p>
-      </div>
-      <div id="project-details-4" class="glass p-6 mb-6">
-        <h4 class="text-2xl font-semibold mb-4">TaskMaster</h4>
-        <p class="mb-4">Created a task management app with React and Firebase, featuring real-time updates and user authentication.</p>
-        <p>Technologies: React, Firebase, Tailwind CSS</p>
-      </div>
-      <div id="project-details-5" class="glass p-6 mb-6">
-        <h4 class="text-2xl font-semibold mb-4">E-Commerce Dashboard</h4>
-        <p class="mb-4">Built a dashboard for an e-commerce platform with Next.js and GraphQL, providing real-time analytics and inventory management.</p>
-        <p>Technologies: Next.js, GraphQL, PostgreSQL</p>
-      </div>
-      <div id="project-details-6" class="glass p-6 mb-6">
-        <h4 class="text-2xl font-semibold mb-4">ChatBot Assistant</h4>
-        <p class="mb-4">Developed an AI-powered chatbot using Dialogflow and Node.js, integrated into a customer support portal.</p>
-        <p>Technologies: Dialogflow, Node.js, Express</p>
-      </div>
-      <div id="project-details-7" class="glass p-6 mb-6">
-        <h4 class="text-2xl font-semibold mb-4">Fitness Tracker</h4>
-        <p class="mb-4">A mobile-friendly fitness tracking app built with React Native, featuring workout logging and progress charts.</p>
-        <p>Technologies: React Native, Firebase</p>
-      </div>
-      <div id="project-details-8" class="glass p-6 mb-6">
-        <h4 class="text-2xl font-semibold mb-4">Blog Platform</h4>
-        <p class="mb-4">Created a blog platform with Next.js and Markdown, supporting dynamic content rendering and SEO optimization.</p>
-        <p>Technologies: Next.js, Markdown, Vercel</p>
-      </div>
-      <div id="project-details-9" class="glass p-6 mb-6">
-        <h4 class="text-2xl font-semibold mb-4">Inventory Management</h4>
-        <p class="mb-4">Developed an inventory management system with React and MySQL, streamlining warehouse operations.</p>
-        <p>Technologies: React, MySQL, Node.js</p>
-      </div>
-      <div id="project-details-10" class="glass p-6 mb-6">
-        <h4 class="text-2xl font-semibold mb-4">Event Planner</h4>
-        <p class="mb-4">Built an event planning app with Vue.js and Firebase, featuring calendar integration and notifications.</p>
-        <p>Technologies: Vue.js, Firebase, Tailwind CSS</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Blog -->
-  <section id="blog" class="section max-w-7xl mx-auto">
-    <h2 class="text-4xl md:text-5xl font-bold mb-8">Blog</h2>
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="glass p-6">
-        <img src="https://images.unsplash.com/photo-1516321310762-47943772f58e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="QA Automation" class="blog-img mb-4">
-        <h3 class="text-xl font-semibold mb-2">Mastering QA Automation</h3>
-        <p class="mb-4">Build fun and robust test suites with Selenium and Python for perfect software.</p>
-        <a href="#" class="text-pink-400 hover:underline">Read More</a>
-      </div>
-      <div class="glass p-6">
-        <img src="https://images.unsplash.com/photo-1551288049-b1f3c6f3b167?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Next.js in Production" class="blog-img mb-4">
-        <h3 class="text-xl font-semibold mb-2">Next.js in Production</h3>
-        <p class="mb-4">Make your React apps shine with Next.js for SSR and static generation.</p>
-        <a href="#" class="text-pink-400 hover:underline">Read More</a>
-      </div>
-      <div class="glass p-6">
-        <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="React Hooks Guide" class="blog-img mb-4">
-        <h3 class="text-xl font-semibold mb-2">Beginner’s Guide to React Hooks</h3>
-        <p class="mb-4">Explore how React Hooks simplify state management and side effects in your apps.</p>
-        <a href="#" class="text-pink-400 hover:underline">Read More</a>
-      </div>
-      <div class="glass p-6">
-        <img src="https://images.unsplash.com/photo-1534972195531-d756b9b62d2e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="CI/CD Best Practices" class="blog-img mb-4">
-        <h3 class="text-xl font-semibold mb-2">CI/CD Best Practices</h3>
-        <p class="mb-4">Streamline deployments with GitHub Actions and Jenkins for faster delivery.</p>
-        <a href="#" class="text-pink-400 hover:underline">Read More</a>
-      </div>
-      <div class="glass p-6">
-        <img src="https://images.unsplash.com/photo-1527477399609-4ca4b5c2d4c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="AI in Web Dev" class="blog-img mb-4">
-        <h3 class="text-xl font-semibold mb-2">AI in Web Development</h3>
-        <p class="mb-4">Discover how AI-powered tools like chatbots enhance user experiences.</p>
-        <a href="#" class="text-pink-400 hover:underline">Read More</a>
-      </div>
-      <div class="glass p-6">
-        <img src="https://images.unsplash.com/photo-1516321310762-47943772f58e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Tailwind CSS Tips" class="blog-img mb-4">
-        <h3 class="text-xl font-semibold mb-2">Tailwind CSS Tips & Tricks</h3>
-        <p class="mb-4">Learn how to create stunning, responsive designs with Tailwind CSS.</p>
-        <a href="#" class="text-pink-400 hover:underline">Read More</a>
-      </div>
-      <div class="glass p-6">
-        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Mentoring Beginners" class="blog-img mb-4">
-        <h3 class="text-xl font-semibold mb-2">Mentoring Beginners in Tech</h3>
-        <p class="mb-4">Tips for guiding new coders to success with patience and practical advice.</p>
-        <a href="#" class="text-pink-400 hover:underline">Read More</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials -->
-  <section id="testimonials" class="section max-w-7xl mx-auto relative">
-    <svg class="decorative w-40 h-40 top-10 right-0" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M50 20c-16.5 0-30 13.5-30 30s13.5 30 30 30 30-13.5 30-30-13.5-30-30-30zm0 50c-11 0-20-9-20-20s9-20 20-20 20 9 20 20-9 20-20 20z" fill="#F472B6"/>
-    </svg>
-    <h2 class="text-4xl md:text-5xl font-bold mb-8">Testimonials</h2>
-    <div class="testimonials-carousel">
-      <div class="testimonials-track flex gap-6">
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/44.jpg" class="avatar" alt="Fatima Noor">
-          <div>
-            <p class="mb-2">"Sajida’s mentorship was a game-changer! Her QA automation tips helped me land an SDET role."</p>
-            <p class="text-sm text-gray-400">— Fatima Noor, SDET</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/46.jpg" class="avatar" alt="Omar Khan">
-          <div>
-            <p class="mb-2">"Her classes are so fun and easy to follow. I learned complex tech concepts with a smile!"</p>
-            <p class="text-sm text-gray-400">— Omar Khan, Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/65.jpg" class="avatar" alt="Aisha Malik">
-          <div>
-            <p class="mb-2">"Sajida’s React workshops were amazing! I built my first app and felt so proud."</p>
-            <p class="text-sm text-gray-400">— Aisha Malik, Front-End Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/32.jpg" class="avatar" alt="Rahul Sharma">
-          <div>
-            <p class="mb-2">"Her CI/CD expertise made our deployments super smooth and saved us tons of time."</p>
-            <p class="text-sm text-gray-400">— Rahul Sharma, DevOps Engineer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/28.jpg" class="avatar" alt="Zara Ahmed">
-          <div>
-            <p class="mb-2">"Sajida’s bootcamps are so inspiring! I went from beginner to confident coder in months."</p>
-            <p class="text-sm text-gray-400">— Zara Ahmed, Junior Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/10.jpg" class="avatar" alt="Ali Raza">
-          <div>
-            <p class="mb-2">"Sajida’s TypeScript course made complex concepts so approachable!"</p>
-            <p class="text-sm text-gray-400">— Ali Raza, Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/12.jpg" class="avatar" alt="Sana Iqbal">
-          <div>
-            <p class="mb-2">"Her Next.js course helped me build my first production-ready app."</p>
-            <p class="text-sm text-gray-400">— Sana Iqbal, Front-End Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/14.jpg" class="avatar" alt="Hassan Ali">
-          <div>
-            <p class="mb-2">"Sajida’s mentorship gave me confidence to switch careers."</p>
-            <p class="text-sm text-gray-400">— Hassan Ali, Software Engineer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/16.jpg" class="avatar" alt="Mehwish Khan">
-          <div>
-            <p class="mb-2">"Her Selenium tutorials were a lifesaver for my QA role."</p>
-            <p class="text-sm text-gray-400">— Mehwish Khan, QA Engineer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/18.jpg" class="avatar" alt="Bilal Ahmed">
-          <div>
-            <p class="mb-2">"Sajida’s bootcamps are the best way to learn coding!"</p>
-            <p class="text-sm text-gray-400">— Bilal Ahmed, Junior Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/20.jpg" class="avatar" alt="Amna Saeed">
-          <div>
-            <p class="mb-2">"Her API testing course was so clear and practical!"</p>
-            <p class="text-sm text-gray-400">— Amna Saeed, QA Engineer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/22.jpg" class="avatar" alt="Usman Malik">
-          <div>
-            <p class="mb-2">"Sajida’s Git workshops made version control a breeze."</p>
-            <p class="text-sm text-gray-400">— Usman Malik, Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/24.jpg" class="avatar" alt="Hina Farooq">
-          <div>
-            <p class="mb-2">"Her mentorship helped me land my dream job!"</p>
-            <p class="text-sm text-gray-400">— Hina Farooq, Front-End Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/26.jpg" class="avatar" alt="Zain Abbas">
-          <div>
-            <p class="mb-2">"Sajida’s Python scripting course was amazing!"</p>
-            <p class="text-sm text-gray-400">— Zain Abbas, Automation Engineer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/30.jpg" class="avatar" alt="Sadia Qureshi">
-          <div>
-            <p class="mb-2">"Her courses made learning tech so much fun!"</p>
-            <p class="text-sm text-gray-400">— Sadia Qureshi, Junior Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/34.jpg" class="avatar" alt="Imran Sheikh">
-          <div>
-            <p class="mb-2">"Sajida’s guidance on CI/CD pipelines was top-notch!"</p>
-            <p class="text-sm text-gray-400">— Imran Sheikh, DevOps Engineer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/36.jpg" class="avatar" alt="Ayesha Siddiqui">
-          <div>
-            <p class="mb-2">"Her React workshops transformed my coding skills."</p>
-            <p class="text-sm text-gray-400">— Ayesha Siddiqui, Front-End Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/38.jpg" class="avatar" alt="Faisal Rehman">
-          <div>
-            <p class="mb-2">"Sajida’s QA automation course was a career booster!"</p>
-            <p class="text-sm text-gray-400">— Faisal Rehman, SDET</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/40.jpg" class="avatar" alt="Nadia Akhtar">
-          <div>
-            <p class="mb-2">"Her mentorship made learning to code so enjoyable!"</p>
-            <p class="text-sm text-gray-400">— Nadia Akhtar, Junior Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/42.jpg" class="avatar" alt="Kamran Yusuf">
-          <div>
-            <p class="mb-2">"Sajida’s TypeScript lessons were clear and fun."</p>
-            <p class="text-sm text-gray-400">— Kamran Yusuf, Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/45.jpg" class="avatar" alt="Rabia Khan">
-          <div>
-            <p class="mb-2">"Her Next.js course was a game-changer for my projects."</p>
-            <p class="text-sm text-gray-400">— Rabia Khan, Front-End Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/47.jpg" class="avatar" alt="Asad Mehmood">
-          <div>
-            <p class="mb-2">"Sajida’s Selenium tips saved our team hours!"</p>
-            <p class="text-sm text-gray-400">— Asad Mehmood, QA Engineer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/49.jpg" class="avatar" alt="Maliha Tariq">
-          <div>
-            <p class="mb-2">"Her bootcamps are so engaging and practical!"</p>
-            <p class="text-sm text-gray-400">— Maliha Tariq, Junior Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/51.jpg" class="avatar" alt="Saad Iqbal">
-          <div>
-            <p class="mb-2">"Sajida’s API testing course was super helpful!"</p>
-            <p class="text-sm text-gray-400">— Saad Iqbal, QA Engineer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/53.jpg" class="avatar" alt="Hira Javed">
-          <div>
-            <p class="mb-2">"Her Git workshops made collaboration so easy!"</p>
-            <p class="text-sm text-gray-400">— Hira Javed, Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/55.jpg" class="avatar" alt="Danish Khan">
-          <div>
-            <p class="mb-2">"Sajida’s mentorship helped me land my first tech job."</p>
-            <p class="text-sm text-gray-400">— Danish Khan, Software Engineer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/57.jpg" class="avatar" alt="Zoya Malik">
-          <div>
-            <p class="mb-2">"Her Python course was fun and easy to follow!"</p>
-            <p class="text-sm text-gray-400">— Zoya Malik, Automation Engineer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/59.jpg" class="avatar" alt="Arif Hussain">
-          <div>
-            <p class="mb-2">"Sajida’s CI/CD training streamlined our workflow."</p>
-            <p class="text-sm text-gray-400">— Arif Hussain, DevOps Engineer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/61.jpg" class="avatar" alt="Sumbul Riaz">
-          <div>
-            <p class="mb-2">"Her React workshops were incredibly inspiring!"</p>
-            <p class="text-sm text-gray-400">— Sumbul Riaz, Front-End Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/63.jpg" class="avatar" alt="Tahir Mehmood">
-          <div>
-            <p class="mb-2">"Sajida’s QA automation course was a career boost."</p>
-            <p class="text-sm text-gray-400">— Tahir Mehmood, SDET</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/66.jpg" class="avatar" alt="Laiba Khan">
-          <div>
-            <p class="mb-2">"Her mentorship made coding so approachable!"</p>
-            <p class="text-sm text-gray-400">— Laiba Khan, Junior Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/68.jpg" class="avatar" alt="Waqas Ali">
-          <div>
-            <p class="mb-2">"Sajida’s TypeScript lessons were a game-changer."</p>
-            <p class="text-sm text-gray-400">— Waqas Ali, Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/70.jpg" class="avatar" alt="Iqra Saeed">
-          <div>
-            <p class="mb-2">"Her Next.js course helped me build amazing apps."</p>
-            <p class="text-sm text-gray-400">— Iqra Saeed, Front-End Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/72.jpg" class="avatar" alt="Haris Khan">
-          <div>
-            <p class="mb-2">"Sajida’s Selenium tips were incredibly practical."</p>
-            <p class="text-sm text-gray-400">— Haris Khan, QA Engineer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/74.jpg" class="avatar" alt="Amina Javed">
-          <div>
-            <p class="mb-2">"Her bootcamps are the best for learning to code!"</p>
-            <p class="text-sm text-gray-400">— Amina Javed, Junior Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/76.jpg" class="avatar" alt="Salman Akhtar">
-          <div>
-            <p class="mb-2">"Sajida’s API testing course was a lifesaver!"</p>
-            <p class="text-sm text-gray-400">— Salman Akhtar, QA Engineer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/78.jpg" class="avatar" alt="Saba Riaz">
-          <div>
-            <p class="mb-2">"Her Git workshops made collaboration so smooth."</p>
-            <p class="text-sm text-gray-400">— Saba Riaz, Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/80.jpg" class="avatar" alt="Zubair Ahmed">
-          <div>
-            <p class="mb-2">"Sajida’s mentorship helped me switch to tech."</p>
-            <p class="text-sm text-gray-400">— Zubair Ahmed, Software Engineer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/82.jpg" class="avatar" alt="Mahnoor Khan">
-          <div>
-            <p class="mb-2">"Her Python course was so fun and engaging!"</p>
-            <p class="text-sm text-gray-400">— Mahnoor Khan, Automation Engineer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/84.jpg" class="avatar" alt="Rizwan Malik">
-          <div>
-            <p class="mb-2">"Sajida’s CI/CD training was a game-changer."</p>
-            <p class="text-sm text-gray-400">— Rizwan Malik, DevOps Engineer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/86.jpg" class="avatar" alt="Eshaal Siddiqui">
-          <div>
-            <p class="mb-2">"Her React workshops were absolutely amazing!"</p>
-            <p class="text-sm text-gray-400">— Eshaal Siddiqui, Front-End Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/88.jpg" class="avatar" alt="Farhan Rehman">
-          <div>
-            <p class="mb-2">"Sajida’s QA automation course boosted my career."</p>
-            <p class="text-sm text-gray-400">— Farhan Rehman, SDET</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/90.jpg" class="avatar" alt="Anum Tariq">
-          <div>
-            <p class="mb-2">"Her mentorship made coding so much fun!"</p>
-            <p class="text-sm text-gray-400">— Anum Tariq, Junior Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/92.jpg" class="avatar" alt="Hamza Yusuf">
-          <div>
-            <p class="mb-2">"Sajida’s TypeScript lessons were super clear!"</p>
-            <p class="text-sm text-gray-400">— Hamza Yusuf, Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/94.jpg" class="avatar" alt="Sania Khan">
-          <div>
-            <p class="mb-2">"Her Next.js course helped me build awesome apps."</p>
-            <p class="text-sm text-gray-400">— Sania Khan, Front-End Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/96.jpg" class="avatar" alt="Ammar Khan">
-          <div>
-            <p class="mb-2">"Sajida’s Selenium tips were a lifesaver!"</p>
-            <p class="text-sm text-gray-400">— Ammar Khan, QA Engineer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/98.jpg" class="avatar" alt="Eman Javed">
-          <div>
-            <p class="mb-2">"Her bootcamps are the best for beginners!"</p>
-            <p class="text-sm text-gray-400">— Eman Javed, Junior Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/100.jpg" class="avatar" alt="Yasir Ali">
-          <div>
-            <p class="mb-2">"Sajida’s API testing course was fantastic!"</p>
-            <p class="text-sm text-gray-400">— Yasir Ali, QA Engineer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/102.jpg" class="avatar" alt="Noor Fatima">
-          <div>
-            <p class="mb-2">"Her Git workshops made teamwork so easy!"</p>
-            <p class="text-sm text-gray-400">— Noor Fatima, Developer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/104.jpg" class="avatar" alt="Ibrahim Malik">
-          <div>
-            <p class="mb-2">"Sajida’s mentorship helped me switch careers!"</p>
-            <p class="text-sm text-gray-400">— Ibrahim Malik, Software Engineer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/106.jpg" class="avatar" alt="Alina Saeed">
-          <div>
-            <p class="mb-2">"Her Python course was so engaging!"</p>
-            <p class="text-sm text-gray-400">— Alina Saeed, Automation Engineer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/men/108.jpg" class="avatar" alt="Hassan Riaz">
-          <div>
-            <p class="mb-2">"Sajida’s CI/CD training was a game-changer!"</p>
-            <p class="text-sm text-gray-400">— Hassan Riaz, DevOps Engineer</p>
-          </div>
-        </div>
-        <div class="glass p-6 flex items-start gap-4 min-w-[300px]">
-          <img src="https://randomuser.me/api/portraits/women/110.jpg" class="avatar" alt="Zainab Siddiqui">
-          <div>
-            <p class="mb-2">"Her React workshops were super fun!"</p>
-            <p class="text-sm text-gray-400">— Zainab Siddiqui, Front-End Developer</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="section max-w-7xl mx-auto text-center relative">
-    <div class="sparkle" style="top: 10%; left: 20%;"></div>
-    <div class="sparkle" style="top: 30%; right: 15%; animation-delay: 0.5s;"></div>
-    <div class="sparkle" style="bottom: 20%; left: 25%; animation-delay: 1s;"></div>
-    <div class="sparkle" style="bottom: 10%; right: 30%; animation-delay: 1.5s;"></div>
-    <h2 class="text-4xl md:text-5xl font-bold mb-6">Get in Touch</h2>
-    <p class="mb-8 text-lg max-w-2xl mx-auto">Let’s create something beautiful together or chat about tech mentorship! Reach out anytime!</p>
-    <div class="glass p-8 max-w-lg mx-auto">
-      <form action="https://formspree.io/f/your-form-id" method="POST" class="space-y-6">
-        <div>
-          <label for="name" class="block text-left font-medium mb-2">Name</label>
-          <input type="text" id="name" name="name" class="w-full p-3 bg-gray-800 rounded-lg focus:ring-2 focus:ring-pink-500" required aria-required="true">
-        </div>
-        <div>
-          <label for="email" class="block text-left font-medium mb-2">Email</label>
-          <input type="email" id="email" name="email" class="w-full p-3 bg-gray-800 rounded-lg focus:ring-2 focus:ring-pink-500" required aria-required="true">
-        </div>
-        <div>
-          <label for="message" class="block text-left font-medium mb-2">Message</label>
-          <textarea id="message" name="message" rows="4" class="w-full p-3 bg-gray-800 rounded-lg focus:ring-2 focus:ring-pink-500" required aria-required="true"></textarea>
-        </div>
-        <button type="submit" class="btn w-full px-8 py-3 bg-pink-500 rounded-full hover:bg-pink-600 font-medium">Send Message</button>
-      </form>
-    </div>
-    <div class="mt-8 flex justify-center gap-6">
-      <a href="https://linkedin.com" target="_blank" class="text-gray-400 hover:text-pink-400" aria-label="LinkedIn">
-        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zm-2.5 15.5v-5.3a3.3 3.3 0 00-3.3-3.3h-.4a2.3 2.3 0 00-2.3 2.3v6.3H7v-8.1h3.1v1.1a3.4 3.4 0 013.1-1.9h.5a4.5 4.5 0 014.5 4.5v4.4h-2.5zM7 5.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/></svg>
-      </a>
-      <a href="https://github.com" target="_blank" class="text-gray-400 hover:text-pink-400" aria-label="GitHub">
-        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2A10 10 0 002 12c0 4.4 2.9 8.1 6.8 9.5.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.2-1.5-1.2-1.5-1-.6.1-.6.1-.6 1.1.1 1.7 1.1 1.7 1.1 1 1.7 2.6 1.2 3.2.9.1-.7.4-1.2.7-1.5-2.5-.3-5.1-1.2-5.1-5.5 0-1.2.4-2.2 1.2-3-.1-.3-.5-1.4.1-2.9 0 0 .9-.3 2.9 1.1a10 10 0 015.2 0c2-1.4 2.9-1.1 2.9-1.1.6 1.5.2 2.6.1 2.9.8.8 1.2 1.8 1.2 3 0 4.3-2.6 5.2-5.1 5.5.4.3.8 1 .8 2v3c0 .3.2.6.7.5A10 10 0 0022 12 10 10 0 0012 2z"/></svg>
-      </a>
-      <a href="https://twitter.com" target="_blank" class="text-gray-400 hover:text-pink-400" aria-label="Twitter">
-        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22.5 5.6c-.8.3-1.6.6-2.5.7 0.9-.5 1.6-1.4 1.9-2.4-.8.5-1.7.8-2.7 1a4.2 4.2 0 00-7.2 3.8 11.9 11.9 0 01-8.6-4.4 4.2 4.2 0 001.3 5.6c-.7 0-1.3-.2-1.9-.5v.1c0 2 1.4 3.7 3.3 4.1-.6.2-1.2.2-1.8.1.5 1.6 2 2.8 3.8 2.8A8.4 8.4 0 012 18.3a11.9 11.9 0 006.4 1.9c7.7 0 11.9-6.4 11.9-11.9 0-.2 0-.4-.1-.6.8-.6 1.5-1.3 2-2.2z"/></svg>
-      </a>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="text-center py-10 text-gray-400 bg-black bg-opacity-30">
-    <p>© 2025 Sajida Khan. All rights reserved.</p>
-    <p class="mt-2 text-sm">Crafted with <span class="text-pink-400">React</span>, <span class="text-pink-400">Tailwind CSS</span>, and <span class="text-pink-400">GSAP</span>.</p>
-  </footer>
-
-  <script>
-    // Mobile menu toggle
-    const hamburger = document.querySelector('.hamburger');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    hamburger.addEventListener('click', () => {
-      mobileMenu.classList.toggle('active');
-      hamburger.querySelectorAll('span').forEach((span, i) => {
-        if (mobileMenu.classList.contains('active')) {
-          if (i === 0) span.style.transform = 'rotate(45deg) translate(5px, 5px)';
-          if (i === 1) span.style.opacity = '0';
-          if (i === 2) span.style.transform = 'rotate(-45deg) translate(8px, -8px)';
-        } else {
-          span.style.transform = 'none';
-          span.style.opacity = '1';
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sajida Khan Balot's Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --accent-color: #06B6D4;
+            --accent-secondary: #EC4899;
         }
-      });
-    });
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #111827;
+            color: #E5E7EB;
+            margin: 0;
+            overflow-x: hidden;
+            transition: all 0.5s ease;
+        }
+        body.light-mode {
+            background: linear-gradient(135deg, #F9FAFB, #E5E7EB);
+            color: #111827;
+        }
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .card {
+            background: rgba(31, 41, 55, 0.95);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            transform-style: preserve-3d;
+            perspective: 1500px;
+        }
+        .light-mode .card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        .card:hover {
+            transform: translateY(-12px) scale(1.05) rotateX(10deg) rotateY(10deg);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3), 0 0 20px var(--accent-color);
+        }
+        .btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            perspective: 1500px;
+        }
+        .btn:hover {
+            transform: scale(1.1) translateZ(20px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.4s ease;
+            border-radius: 50%;
+        }
+        .btn:hover::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        input, textarea {
+            transition: all 0.3s ease;
+            background: #374151;
+            color: #E5E7EB;
+            border-color: #4B5563;
+            border-radius: 8px;
+        }
+        .light-mode input, .light-mode textarea {
+            background: #FFFFFF;
+            color: #111827;
+            border-color: #D1D5DB;
+        }
+        input:focus, textarea:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.3);
+            outline: none;
+        }
+        .hero-bg {
+            position: relative;
+            overflow: hidden;
+        }
+        #three-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        .project-img {
+            transition: transform 0.4s ease;
+            transform-style: preserve-3d;
+            border-radius: 8px;
+            loading: lazy;
+        }
+        .project-img:hover {
+            transform: scale(1.07) translateZ(20px);
+        }
+        .profile-img {
+            transition: transform 0.5s ease;
+            transform-style: preserve-3d;
+            border: 2px solid transparent;
+            border-image: linear-gradient(45deg, var(--accent-color), var(--accent-secondary)) 1;
+        }
+        .profile-img:hover {
+            transform: rotateY(15deg) translateZ(30px);
+            filter: drop-shadow(0 0 15px var(--accent-color));
+        }
+        .contact-icon {
+            transition: all 0.3s ease;
+        }
+        .contact-icon:hover {
+            color: var(--accent-secondary);
+            transform: scale(1.3) rotate(5deg);
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--accent-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+        .light-mode .nav-link::after {
+            background: var(--accent-secondary);
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .logo {
+            animation: pulse-logo 3s infinite;
+            transition: transform 0.3s ease;
+        }
+        .logo:hover {
+            transform: rotateY(10deg) scale(1.05);
+            filter: drop-shadow(0 0 10px var(--accent-color));
+        }
+        @keyframes pulse-logo {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #E5E7EB;
+            margin: 2px 0;
+            transition: all 0.3s ease;
+        }
+        .light-mode .hamburger span {
+            background: #111827;
+        }
+        .mobile-menu {
+            display: none;
+            backdrop-filter: blur(10px);
+        }
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links { display: none; }
+            .mobile-menu {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                width: 100%;
+                background: rgba(31, 41, 55, 0.95);
+                padding: 1rem;
+                transform: translateY(-100%);
+                transition: transform 0.3s ease;
+            }
+            .light-mode .mobile-menu {
+                background: rgba(249, 250, 251, 0.95);
+            }
+            .mobile-menu.active {
+                transform: translateY(0);
+            }
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -7px);
+            }
+        }
+        .progress-bar {
+            height: 8px;
+            background: #4B5563;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .light-mode .progress-bar {
+            background: #D1D5DB;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--accent-color);
+            transition: width 1s ease-in-out;
+        }
+        .light-mode .progress-fill {
+            background: var(--accent-secondary);
+        }
+        .filter-btn {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .filter-btn.active {
+            background: var(--accent-color);
+            color: white;
+        }
+        .light-mode .filter-btn.active {
+            background: var(--accent-secondary);
+        }
+        .filter-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .light-mode .filter-btn::after {
+            background: var(--accent-secondary);
+        }
+        .filter-btn.active::after {
+            width: 100%;
+        }
+        .tooltip {
+            position: absolute;
+            background: #374151;
+            color: #E5E7EB;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            top: -30px;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+        .light-mode .tooltip {
+            background: #D1D5DB;
+            color: #111827;
+        }
+        .skill-card:hover .tooltip {
+            opacity: 1;
+        }
+        .carousel {
+            position: relative;
+            overflow: hidden;
+        }
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.7s ease;
+        }
+        .carousel-item {
+            min-width: 100%;
+            position: relative;
+        }
+        .carousel:hover .carousel-inner {
+            animation-play-state: paused;
+        }
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            background: #4B5563;
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .carousel-dot.active {
+            background: var(--accent-color);
+        }
+        .light-mode .carousel-dot {
+            background: #D1D5DB;
+        }
+        .light-mode .carousel-dot.active {
+            background: var(--accent-secondary);
+        }
+        .project-tag {
+            transition: all 0.3s ease;
+        }
+        .project-tag:hover {
+            transform: scale(1.1);
+            background-color: var(--accent-secondary);
+        }
+        .light-mode .project-tag:hover {
+            background-color: var(--accent-color);
+        }
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #111827;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #374151;
+            border-top: 5px solid var(--accent-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0.75rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--accent-color);
+        }
+        .timeline-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1.5rem;
+            height: 1.5rem;
+            background: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .light-mode .timeline-item::before, .light-mode .timeline-icon {
+            background: var(--accent-secondary);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="spinner"></div>
+    </div>
 
-    // Testimonials Carousel
-    const track = document.querySelector('.testimonials-track');
-    let position = 0;
-    const testimonialWidth = 300 + 24; // Width of each testimonial card + gap
-    const totalTestimonials = 50; // Total number of testimonials
-    const visibleTestimonials = 3; // Number of testimonials visible at a time
-    const maxPosition = -(totalTestimonials - visibleTestimonials) * testimonialWidth;
+    <!-- Navigation -->
+    <nav class="bg-gradient-to-r from-gray-800 to-gray-900 light-mode:from-white light-mode:to-gray-100 shadow-xl sticky top-0 z-20" aria-label="Main Navigation">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <h1 class="logo text-3xl font-bold text-cyan-400 light-mode:text-magenta-500">Sajida Khan Balot</h1>
+                </div>
+                <div class="nav-links flex items-center space-x-8">
+                    <a href="#about" class="nav-link text-gray-200 light-mode:text-gray-700 hover:text-cyan-400 light-mode:hover:text-magenta-500 font-semibold">About</a>
+                    <a href="#skills" class="nav-link text-gray-200 light-mode:text-gray-700 hover:text-cyan-400 light-mode:hover:text-magenta-500 font-semibold">Skills</a>
+                    <a href="#projects" class="nav-link text-gray-200 light-mode:text-gray-700 hover:text-cyan-400 light-mode:hover:text-magenta-500 font-semibold">Projects</a>
+                    <a href="#testimonials" class="nav-link text-gray-200 light-mode:text-gray-700 hover:text-cyan-400 light-mode:hover:text-magenta-500 font-semibold">Testimonials</a>
+                    <a href="#contact" class="nav-link text-gray-200 light-mode:text-gray-700 hover:text-cyan-400 light-mode:hover:text-magenta-500 font-semibold">Contact</a>
+                    <button id="theme-toggle" class="text-gray-200 light-mode:text-gray-700 hover:text-cyan-400 light-mode:hover:text-magenta-500 focus:outline-none" aria-label="Toggle Theme"><i class="fas fa-sun"></i></button>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="mobile-menu">
+                <a href="#about" class="nav-link text-gray-200 light-mode:text-gray-700 hover:text-cyan-400 light-mode:hover:text-magenta-500 font-semibold py-2">About</a>
+                <a href="#skills" class="nav-link text-gray-200 light-mode:text-gray-700 hover:text-cyan-400 light-mode:hover:text-magenta-500 font-semibold py-2">Skills</a>
+                <a href="#projects" class="nav-link text-gray-200 light-mode:text-gray-700 hover:text-cyan-400 light-mode:hover:text-magenta-500 font-semibold py-2">Projects</a>
+                <a href="#testimonials" class="nav-link text-gray-200 light-mode:text-gray-700 hover:text-cyan-400 light-mode:hover:text-magenta-500 font-semibold py-2">Testimonials</a>
+                <a href="#contact" class="nav-link text-gray-200 light-mode:text-gray-700 hover:text-cyan-400 light-mode:hover:text-magenta-500 font-semibold py-2">Contact</a>
+            </div>
+        </div>
+    </nav>
 
-    function moveCarousel() {
-      position -= testimonialWidth;
-      if (position < maxPosition) {
-        position = 0;
-      }
-      track.style.transform = `translateX(${position}px)`;
-    }
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg text-white py-48" aria-label="Hero Section">
+        <canvas id="three-canvas"></canvas>
+        <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-5xl md:text-6xl font-bold mb-6 typewriter" data-text="Sajida Khan Portfolio" style="text-shadow: 0 0 10px var(--accent-color);"></h2>
+            <p class="text-xl md:text-2xl mb-8 fade-in">Coding Instructor & Developer passionate about teaching and building innovative solutions.</p>
+            <div class="space-x-4">
+                <a href="#contact" class="btn bg-cyan-500 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-cyan-600 light-mode:bg-magenta-500 light-mode:hover:bg-magenta-600 fade-in">Get in Touch</a>
+                <a href="#projects" class="btn bg-transparent border-2 border-cyan-500 text-cyan-500 px-8 py-3 rounded-full font-semibold hover:bg-cyan-500 hover:text-white light-mode:border-magenta-500 light-mode:text-magenta-500 light-mode:hover:bg-magenta-500 light-mode:hover:text-white fade-in">View Projects</a>
+            </div>
+        </div>
+    </section>
 
-    setInterval(moveCarousel, 3000);
+    <!-- About Section -->
+    <section id="about" class="py-48" aria-label="About Me">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-bold mb-12 text-center text-gray-100 light-mode:text-gray-800 fade-in">About Me</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Professional Muslim girl image -->
+                <div class="fade-in">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Sajida Khan Balot, a professional Muslim woman coding" class="profile-img rounded-lg w-80 h-80 mx-auto shadow-xl object-cover">
+                </div>
+                <div class="fade-in">
+                    <div class="card p-8 rounded-xl shadow-lg">
+                        <p class="text-lg leading-relaxed mb-6 font-semibold">
+                            I'm Sajida Khan Balot, a seasoned Coding Instructor and Developer with over 25 years of experience. My mission is to empower individuals through education and innovation, specializing in Python, Java, C, web development, AI, Machine Learning, and emerging languages like Racket and Go.
+                        </p>
+                        <div class="space-y-6">
+                            <div class="timeline-item">
+                                <span class="timeline-icon"><i class="fas fa-code fa-sm"></i></span>
+                                <p><strong>1995-2005:</strong> Taught foundational programming at local institutes, shaping young coders.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="timeline-icon"><i class="fas fa-laptop-code fa-sm"></i></span>
+                                <p><strong>2005-2015:</strong> Developed enterprise Java applications for global clients.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="timeline-icon"><i class="fas fa-chalkboard-teacher fa-sm"></i></span>
+                                <p><strong>2015-Present:</strong> Leading coding bootcamps and building AI-driven and web solutions.</p>
+                            </div>
+                        </div>
+                        <a href="path/to/your-resume.pdf" download class="btn bg-cyan-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-cyan-600 light-mode:bg-magenta-500 light-mode:hover:bg-magenta-600 mt-6 inline-block">Download Resume</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    // GSAP Animations
-    gsap.from("#hero .w-20", { opacity: 0, scale: 0.5, duration: 1, ease: "back.out(1.7)" });
-    gsap.from("#hero h1", { opacity: 0, y: -50, duration: 1, delay: 0.5, ease: "power3.out" });
-    gsap.from("#hero p", { opacity: 0, y: 30, duration: 1, delay: 0.8, ease: "power3.out" });
-    gsap.from("#hero .flex", { opacity: 0, y: 30, duration: 1, delay: 1.1, ease: "power3.out" });
-    gsap.from(".decorative", { opacity: 0, scale: 0.5, stagger: 0.2, duration: 1, ease: "elastic.out(1, 0.3)" });
-    gsap.from("#about p, #about ul", { 
-      scrollTrigger: { trigger: "#about", start: "top 80%" }, 
-      opacity: 0, y: 50, stagger: 0.2, duration: 0.8, ease: "power3.out" 
-    });
-    gsap.from("#skills div", { 
-      scrollTrigger: { trigger: "#skills", start: "top 80%" }, 
-      opacity: 0, y: 50, stagger: 0.1, duration: 0.8, ease: "power3.out" 
-    });
-    gsap.from("#projects div", { 
-      scrollTrigger: { trigger: "#projects", start: "top 80%" }, 
-      opacity: 0, y: 50, stagger: 0.1, duration: 0.8, ease: "power3.out" 
-    });
-    gsap.from("#blog div", { 
-      scrollTrigger: { trigger: "#blog", start: "top 80%" }, 
-      opacity: 0, y: 50, stagger: 0.1, duration: 0.8, ease: "power3.out" 
-    });
-    gsap.from(".testimonials-track div", { 
-      scrollTrigger: { trigger: "#testimonials", start: "top 80%" }, 
-      opacity: 0, y: 50, stagger: 0.1, duration: 0.8, ease: "power3.out" 
-    });
-    gsap.from("#contact form, #contact .flex", { 
-      scrollTrigger: { trigger: "#contact", start: "top 80%" }, 
-      opacity: 0, y: 50, stagger: 0.2, duration: 0.8, ease: "power3.out" 
-    });
-    gsap.from(".sparkle", { 
-      scrollTrigger: { trigger: "#contact", start: "top 80%" }, 
-      opacity: 0, scale: 0, stagger: 0.3, duration: 1, ease: "elastic.out(1, 0.5)" 
-    });
-  </script>
+    <!-- Skills Section -->
+    <section id="skills" class="bg-gray-900 light-mode:bg-gray-100 py-48" aria-label="Skills">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-bold mb-12 text-center text-gray-100 light-mode:text-gray-800 fade-in">My Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="card skill-card p-6 rounded-xl shadow-lg tilt relative fade-in" data-tilt data-tilt-max="20" data-tilt-speed="400" data-tilt-perspective="1500" data-tilt-glare data-tilt-max-glare="0.7">
+                    <i class="fab fa-python text-4xl text-cyan-400 light-mode:text-magenta-500 mb-3"></i>
+                    <h3 class="text-xl font-semibold mb-3">Python</h3>
+                    <p class="text-gray-300 light-mode:text-gray-600 mb-4">Expert in scripting, data analysis, and web development.</p>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 90%;"></div></div>
+                    <span class="tooltip left-1/2">Django, Flask, Pandas</span>
+                </div>
+                <div class="card skill-card p-6 rounded-xl shadow-lg tilt relative fade-in" data-tilt data-tilt-max="20" data-tilt-speed="400" data-tilt-perspective="1500" data-tilt-glare data-tilt-max-glare="0.7">
+                    <i class="fab fa-java text-4xl text-cyan-400 light-mode:text-magenta-500 mb-3"></i>
+                    <h3 class="text-xl font-semibold mb-3">Java</h3>
+                    <p class="text-gray-300 light-mode:text-gray-600 mb-4">Proficient in enterprise and Android development.</p>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 85%;"></div></div>
+                    <span class="tooltip left-1/2">Spring, Hibernate</span>
+                </div>
+                <div class="card skill-card p-6 rounded-xl shadow-lg tilt relative fade-in" data-tilt data-tilt-max="20" data-tilt-speed="400" data-tilt-perspective="1500" data-tilt-glare data-tilt-max-glare="0.7">
+                    <i class="fas fa-code text-4xl text-cyan-400 light-mode:text-magenta-500 mb-3"></i>
+                    <h3 class="text-xl font-semibold mb-3">C</h3>
+                    <p class="text-gray-300 light-mode:text-gray-600 mb-4">Skilled in system programming and embedded systems.</p>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 80%;"></div></div>
+                    <span class="tooltip left-1/2">Embedded C</span>
+                </div>
+                <div class="card skill-card p-6 rounded-xl shadow-lg tilt relative fade-in" data-tilt data-tilt-max="20" data-tilt-speed="400" data-tilt-perspective="1500" data-tilt-glare data-tilt-max-glare="0.7">
+                    <i class="fab fa-js text-4xl text-cyan-400 light-mode:text-magenta-500 mb-3"></i>
+                    <h3 class="text-xl font-semibold mb-3">Web Development</h3>
+                    <p class="text-gray-300 light-mode:text-gray-600 mb-4">Experienced in HTML, CSS, JavaScript, React.</p>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 88%;"></div></div>
+                    <span class="tooltip left-1/2">React, Node.js, TypeScript</span>
+                </div>
+                <div class="card skill-card p-6 rounded-xl shadow-lg tilt relative fade-in" data-tilt data-tilt-max="20" data-tilt-speed="400" data-tilt-perspective="1500" data-tilt-glare data-tilt-max-glare="0.7">
+                    <i class="fas fa-robot text-4xl text-cyan-400 light-mode:text-magenta-500 mb-3"></i>
+                    <h3 class="text-xl font-semibold mb-3">Machine Learning</h3>
+                    <p class="text-gray-300 light-mode:text-gray-600 mb-4">Building predictive models and data pipelines.</p>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 85%;"></div></div>
+                    <span class="tooltip left-1/2">TensorFlow, Scikit-learn</span>
+                </div>
+                <div class="card skill-card p-6 rounded-xl shadow-lg tilt relative fade-in" data-tilt data-tilt-max="20" data-tilt-speed="400" data-tilt-perspective="1500" data-tilt-glare data-tilt-max-glare="0.7">
+                    <i class="fas fa-brain text-4xl text-cyan-400 light-mode:text-magenta-500 mb-3"></i>
+                    <h3 class="text-xl font-semibold mb-3">AI</h3>
+                    <p class="text-gray-300 light-mode:text-gray-600 mb-4">Developing intelligent systems and chatbots.</p>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 87%;"></div></div>
+                    <span class="tooltip left-1/2">Rasa, PyTorch</span>
+                </div>
+                <div class="card skill-card p-6 rounded-xl shadow-lg tilt relative fade-in" data-tilt data-tilt-max="20" data-tilt-speed="400" data-tilt-perspective="1500" data-tilt-glare data-tilt-max-glare="0.7">
+                    <i class="fas fa-terminal text-4xl text-cyan-400 light-mode:text-magenta-500 mb-3"></i>
+                    <h3 class="text-xl font-semibold mb-3">Racket</h3>
+                    <p class="text-gray-300 light-mode:text-gray-600 mb-4">Functional programming for educational tools.</p>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 75%;"></div></div>
+                    <span class="tooltip left-1/2">DrRacket</span>
+                </div>
+                <div class="card skill-card p-6 rounded-xl shadow-lg tilt relative fade-in" data-tilt data-tilt-max="20" data-tilt-speed="400" data-tilt-perspective="1500" data-tilt-glare data-tilt-max-glare="0.7">
+                    <i class="fab fa-r-project text-4xl text-cyan-400 light-mode:text-magenta-500 mb-3"></i>
+                    <h3 class="text-xl font-semibold mb-3">R</h3>
+                    <p class="text-gray-300 light-mode:text-gray-600 mb-4">Statistical analysis and data visualization.</p>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 80%;"></div></div>
+                    <span class="tooltip left-1/2">ggplot2, dplyr</span>
+                </div>
+                <div class="card skill-card p-6 rounded-xl shadow-lg tilt relative fade-in" data-tilt data-tilt-max="20" data-tilt-speed="400" data-tilt-perspective="1500" data-tilt-glare data-tilt-max-glare="0.7">
+                    <i class="fab fa-golang text-4xl text-cyan-400 light-mode:text-magenta-500 mb-3"></i>
+                    <h3 class="text-xl font-semibold mb-3">Go</h3>
+                    <p class="text-gray-300 light-mode:text-gray-600 mb-4">Building scalable backend systems.</p>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 78%;"></div></div>
+                    <span class="tooltip left-1/2">Goroutines, Gin</span>
+                </div>
+                <div class="card skill-card p-6 rounded-xl shadow-lg tilt relative fade-in" data-tilt data-tilt-max="20" data-tilt-speed="400" data-tilt-perspective="1500" data-tilt-glare data-tilt-max-glare="0.7">
+                    <i class="fab fa-js-square text-4xl text-cyan-400 light-mode:text-magenta-500 mb-3"></i>
+                    <h3 class="text-xl font-semibold mb-3">TypeScript</h3>
+                    <p class="text-gray-300 light-mode:text-gray-600 mb-4">Type-safe JavaScript for robust web apps.</p>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 82%;"></div></div>
+                    <span class="tooltip left-1/2">React, Angular</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="bg-gray-900 light-mode:bg-gray-100 py-48" aria-label="Projects">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-bold mb-12 text-center text-gray-100 light-mode:text-gray-800 fade-in">My Projects</h2>
+            <div class="flex justify-center mb-8 space-x-4 flex-wrap">
+                <button class="filter-btn px-4 py-2 rounded-full bg-gray-700 light-mode:bg-gray-200 text-gray-200 light-mode:text-gray-700 hover:bg-cyan-500 hover:text-white light-mode:hover:bg-magenta-500 active" data-filter="all">All</button>
+                <button class="filter-btn px-4 py-2 rounded-full bg-gray-700 light-mode:bg-gray-200 text-gray-200 light-mode:text-gray-700 hover:bg-cyan-500 hover:text-white light-mode:hover:bg-magenta-500" data-filter="python">Python</button>
+                <button class="filter-btn px-4 py-2 rounded-full bg-gray-700 light-mode:bg-gray-200 text-gray-200 light-mode:text-gray-700 hover:bg-cyan-500 hover:text-white light-mode:hover:bg-magenta-500" data-filter="java">Java</button>
+                <button class="filter-btn px-4 py-2 rounded-full bg-gray-700 light-mode:bg-gray-200 text-gray-200 light-mode:text-gray-700 hover:bg-cyan-500 hover:text-white light-mode:hover:bg-magenta-500" data-filter="web">Web</button>
+                <button class="filter-btn px-4 py-2 rounded-full bg-gray-700 light-mode:bg-gray-200 text-gray-200 light-mode:text-gray-700 hover:bg-cyan-500 hover:text-white light-mode:hover:bg-magenta-500" data-filter="game">Game</button>
+                <button class="filter-btn px-4 py-2 rounded-full bg-gray-700 light-mode:bg-gray-200 text-gray-200 light-mode:text-gray-700 hover:bg-cyan-500 hover:text-white light-mode:hover:bg-magenta-500" data-filter="ai">AI</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 project-grid">
+                <div class="card p-6 rounded-xl shadow-lg tilt project-item fade-in" data-category="python" data-tilt data-tilt-max="20" data-tilt-speed="400" data-tilt-perspective="1500" data-tilt-glare data-tilt-max-glare="0.7">
+                    <img src="https://images.unsplash.com/photo-1551288049-b115893e9175?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250&q=80" alt="Python Data Analysis Dashboard" class="project-img w-full h-48 object-cover mb-4">
+                    <h3 class="text-xl font-semibold mb-3 text-cyan-400 light-mode:text-magenta-500">Data Analysis Dashboard</h3>
+                    <p class="text-gray-300 light-mode:text-gray-600 mb-4">A Python-based dashboard for real-time data analysis using Django and Pandas.</p>
+                    <div class="flex space-x-2 mb-4">
+                        <span class="project-tag text-xs bg-cyan-500 light-mode:bg-magenta-500 text-white px-2 py-1 rounded-full">Django</span>
+                        <span class="project-tag text-xs bg-cyan-500 light-mode:bg-magenta-500 text-white px-2 py-1 rounded-full">Pandas</span>
+                        <span class="project-tag text-xs bg-cyan-500 light-mode:bg-magenta-500 text-white px-2 py-1 rounded-full">Plotly</span>
+                    </div>
+                    <div class="flex space-x-4">
+                        <a href="#" class="btn text-cyan-400 light-mode:text-magenta-500 hover:text-cyan-200 light-mode:hover:text-magenta-400 font-semibold">View Project</a>
+                        <a href="#" class="btn text-cyan-400 light-mode:text-magenta-500 hover:text-cyan-200 light-mode:hover:text-magenta-400 font-semibold">Live Demo</a>
+                    </div>
+                </div>
+                <div class="card p-6 rounded-xl shadow-lg tilt project-item fade-in" data-category="java" data-tilt data-tilt-max="20" data-tilt-speed="400" data-tilt-perspective="1500" data-tilt-glare data-tilt-max-glare="0.7">
+                    <img src="https://images.unsplash.com/photo-1534665482403-a909d0d97c67?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250&q=80" alt="Java Enterprise App" class="project-img w-full h-48 object-cover mb-4">
+                    <h3 class="text-xl font-semibold mb-3 text-cyan-400 light-mode:text-magenta-500">Enterprise Management System</h3>
+                    <p class="text-gray-300 light-mode:text-gray-600 mb-4">A Java-based enterprise app with Spring and Hibernate.</p>
+                    <div class="flex space-x-2 mb-4">
+                        <span class="project-tag text-xs bg-cyan-500 light-mode:bg-magenta-500 text-white px-2 py-1 rounded-full">Spring</span>
+                        <span class="project-tag text-xs bg-cyan-500 light-mode:bg-magenta-500 text-white px-2 py-1 rounded-full">Hibernate</span>
+                    </div>
+                    <div class="flex space-x-4">
+                        <a href="#" class="btn text-cyan-400 light-mode:text-magenta-500 hover:text-cyan-200 light-mode:hover:text-magenta-400 font-semibold">View Project</a>
+                        <a href="#" class="btn text-cyan-400 light-mode:text-magenta-500 hover:text-cyan-200 light-mode:hover:text-magenta-400 font-semibold">Live Demo</a>
+                    </div>
+                </div>
+                <div class="card p-6 rounded-xl shadow-lg tilt project-item fade-in" data-category="web" data-tilt data-tilt-max="20" data-tilt-speed="400" data-tilt-perspective="1500" data-tilt-glare data-tilt-max-glare="0.7">
+                    <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250&q=80" alt="Web App" class="project-img w-full h-48 object-cover mb-4">
+                    <h3 class="text-xl font-semibold mb-3 text-cyan-400 light-mode:text-magenta-500">E-Commerce Platform</h3>
+                    <p class="text-gray-300 light-mode:text-gray-600 mb-4">A modern web app with React, Node.js, and TypeScript.</p>
+                    <div class="flex space-x-2 mb-4">
+                        <span class="project-tag text-xs bg-cyan-500 light-mode:bg-magenta-500 text-white px-2 py-1 rounded-full">React</span>
+                        <span class="project-tag text-xs bg-cyan-500 light-mode:bg-magenta-500 text-white px-2 py-1 rounded-full">Node.js</span>
+                        <span class="project-tag text-xs bg-cyan-500 light-mode:bg-magenta-500 text-white px-2 py-1 rounded-full">TypeScript</span>
+                    </div>
+                    <div class="flex space-x-4">
+                        <a href="#" class="btn text-cyan-400 light-mode:text-magenta-500 hover:text-cyan-200 light-mode:hover:text-magenta-400 font-semibold">View Project</a>
+                        <a href="#" class="btn text-cyan-400 light-mode:text-magenta-500 hover:text-cyan-200 light-mode:hover:text-magenta-400 font-semibold">Live Demo</a>
+                    </div>
+                </div>
+                <div class="card p-6 rounded-xl shadow-lg tilt project-item fade-in" data-category="game" data-tilt data-tilt-max="20" data-tilt-speed="400" data-tilt-perspective="1500" data-tilt-glare data-tilt-max-glare="0.7">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250&q=80" alt="Space Adventure Game" class="project-img w-full h-48 object-cover mb-4">
+                    <h3 class="text-xl font-semibold mb-3 text-cyan-400 light-mode:text-magenta-500">Space Adventure Game</h3>
+                    <p class="text-gray-300 light-mode:text-gray-600 mb-4">A 2D space shooter built with Pygame and Python.</p>
+                    <div class="flex space-x-2 mb-4">
+                        <span class="project-tag text-xs bg-cyan-500 light-mode:bg-magenta-500 text-white px-2 py-1 rounded-full">Pygame</span>
+                        <span class="project-tag text-xs bg-cyan-500 light-mode:bg-magenta-500 text-white px-2 py-1 rounded-full">Python</span>
+                    </div>
+                    <div class="flex space-x-4">
+                        <a href="#" class="btn text-cyan-400 light-mode:text-magenta-500 hover:text-cyan-200 light-mode:hover:text-magenta-400 font-semibold">View Project</a>
+                        <a href="#" class="btn text-cyan-400 light-mode:text-magenta-500 hover:text-cyan-200 light-mode:hover:text-magenta-400 font-semibold">Live Demo</a>
+                    </div>
+                </div>
+                <div class="card p-6 rounded-xl shadow-lg tilt project-item fade-in" data-category="ai" data-tilt data-tilt-max="20" data-tilt-speed="400" data-tilt-perspective="1500" data-tilt-glare data-tilt-max-glare="0.7">
+                    <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250&q=80" alt="Health Chatbot" class="project-img w-full h-48 object-cover mb-4">
+                    <h3 class="text-xl font-semibold mb-3 text-cyan-400 light-mode:text-magenta-500">Health Assistant Chatbot</h3>
+                    <p class="text-gray-300 light-mode:text-gray-600 mb-4">An AI-powered chatbot for health queries using Rasa and Python.</p>
+                    <div class="flex space-x-2 mb-4">
+                        <span class="project-tag text-xs bg-cyan-500 light-mode:bg-magenta-500 text-white px-2 py-1 rounded-full">Rasa</span>
+                        <span class="project-tag text-xs bg-cyan-500 light-mode:bg-magenta-500 text-white px-2 py-1 rounded-full">Python</span>
+                        <span class="project-tag text-xs bg-cyan-500 light-mode:bg-magenta-500 text-white px-2 py-1 rounded-full">NLP</span>
+                    </div>
+                   ofpacket-delta
+                    <div class="flex space-x-4">
+                        <a href="#" class="btn text-cyan-400 light-mode:text-magenta-500 hover:text-cyan-200 light-mode:hover:text-magenta-400 font-semibold">View Project</a>
+                        <a href="#" class="btn text-cyan-400 light-mode:text-magenta-500 hover:text-cyan-200 light-mode:hover:text-magenta-400 font-semibold">Live Demo</a>
+                    </div>
+                </div>
+                <div class="card p-6 rounded-xl shadow-lg tilt project-item fade-in" data-category="ai" data-tilt data-tilt-max="20" data-tilt-speed="400" data-tilt-perspective="1500" data-tilt-glare data-tilt-max-glare="0.7">
+                    <img src="https://images.unsplash.com/photo-1526374965-8f61d4dc5c5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250&q=80" alt="Sentiment Analysis Tool" class="project-img w-full h-48 object-cover mb-4">
+                    <h3 class="text-xl font-semibold mb-3 text-cyan-400 light-mode:text-magenta-500">Sentiment Analysis Tool</h3>
+                    <p class="text-gray-300 light-mode:text-gray-600 mb-4">An ML-based tool for social media sentiment analysis using TensorFlow.</p>
+                    <div class="flex space-x-2 mb-4">
+                        <span class="project-tag text-xs bg-cyan-500 light-mode:bg-magenta-500 text-white px-2 py-1 rounded-full">TensorFlow</span>
+                        <span class="project-tag text-xs bg-cyan-500 light-mode:bg-magenta-500 text-white px-2 py-1 rounded-full">Python</span>
+                        <span class="project-tag text-xs bg-cyan-500 light-mode:bg-magenta-500 text-white px-2 py-1 rounded-full">NLP</span>
+                    </div>
+                    <div class="flex space-x-4">
+                        <a href="#" class="btn text-cyan-400 light-mode:text-magenta-500 hover:text-cyan-200 light-mode:hover:text-magenta-400 font-semibold">View Project</a>
+                        <a href="#" class="btn text-cyan-400 light-mode:text-magenta-500 hover:text-cyan-200 light-mode:hover:text-magenta-400 font-semibold">Live Demo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-48" aria-label="Testimonials">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-bold mb-12 text-center text-gray-100 light-mode:text-gray-800 fade-in">Testimonials</h2>
+            <div class="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item fade-in">
+                        <div class="card p-6 rounded-xl shadow-lg tilt relative mx-auto max-w-md" data-tilt data-tilt-max="20" data-tilt-speed="200" data-tilt-perspective="1500" data-tilt-glare data-tilt-max-glare="0.7">
+                            <i class="fas fa-quote-left text-3xl text-cyan-500 light-mode:text-magenta-500 mb-4 opacity-50"></i>
+                            <p class="text-lg text-gray-300 light-mode:text-gray-600 mb-4">"Sajida’s Python course was a game-changer, making complex concepts accessible and engaging."</p>
+                            <p class="text-md text-cyan-600 light-mode:text-magenta-600 font-semibold">— Priya Sharma, Student</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="card p-6 rounded-xl shadow-lg tilt relative mx-auto max-w-md" data-tilt data-tilt-max="20" data-tilt-speed="200" data-tilt-perspective="1500" data-tilt-glare data-tilt-max-glare="0.7">
+                            <i class="fas fa-quote-left text-3xl text-cyan-500 light-mode:text-magenta-500 mb-4 opacity-50"></i>
+                            <p class="text-lg text-gray-300 light-mode:text-gray-600 mb-4">"Her Java expertise streamlined our development process, delivering robust solutions."</p>
+                            <p class="text-md text-cyan-600 light-mode:text-magenta-600 font-semibold">— Anil Gupta, Senior Developer</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item fade-in">
+                        <div class="card p-6 rounded-xl shadow-lg tilt relative mx-auto max-w-md" data-tilt data-tilt-max="20" data-tilt-speed="200" data-tilt-perspective="1500" data-tilt-glare data-tilt-max-glare="0.7">
+                            <i class="fas fa-quote-left text-3xl text-cyan-500 light-mode:text-magenta-500 mb-4 opacity-50"></i>
+                            <p class="text-lg text-gray-300 light-mode:text-gray-600 mb-4">"Sajida’s web development workshops were hands-on and inspiring, boosting my career."</p>
+                            <p class="text-md text-cyan-600 light-mode:text-magenta-600 font-semibold">— Sarah Ahmed, Junior Developer</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item fade-in">
+                        <div class="card p-6 rounded-xl shadow-lg tilt relative mx-auto max-w-md" data-tilt data-tilt-max="20" data-tilt-speed="200" data-tilt-perspective="1500" data-tilt-glare data-tilt-max-glare="0.7">
+                            <i class="fas fa-quote-left text-3xl text-cyan-500 light-mode:text-magenta-500 mb-4 opacity-50"></i>
+                            <p class="text-lg text-gray-300 light-mode:text-gray-600 mb-4">"Her AI chatbot project was innovative, enhancing our customer support efficiency."</p>
+                            <p class="text-md text-cyan-600 light-mode:text-magenta-600 font-semibold">— Vikram Singh, Tech Lead</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item fade-in">
+                        <div class="card p-6 rounded-xl shadow-lg tilt relative mx-auto max-w-md" data-tilt data-tilt-max="20" data-tilt-speed="200" data-tilt-perspective="1500" data-tilt-glare data-tilt-max-glare="0.7">
+                            <i class="fas fa-quote-left text-3xl text-cyan-500 light-mode:text-magenta-500 mb-4" opacity="0.50"></i>
+                            <p class="text-lg text-gray-300 light-mode:text-gray-600 mb-4">"Sajida’s mentorship in Machine Learning was exceptional, guiding our team to build impactful models."</p>
+                            <p class="text-md text-cyan-600 light-mode:text-magenta-600 font-semibold">— Amina Khan, Data Scientist</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-dots">
+                    <span class="carousel-dot active"></span>
+                    <span class="carousel-dot"></span>
+                    <span class="carousel-dot"></span>
+                    <span class="carousel-dot"></span>
+                    <span class="carousel-dot"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-48" aria-label="Contact">
+        <div class="contact" id="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-bold mb-12 text-center text-gray-100 light-mode:text-gray-800">Contact Me</h2>
+            <div class="max-w-xl mx-auto w-full fade-in">
+                <p class="text-lg md font-semibold text-xl text-center mb-8">Let's collaborate on your next project! Reach out via the form or social media.</p>
+                <div class="card p-10 rounded-xl shadow-lg">
+                    <form id="contact-form" class="space-y-6">
+                        <div class="space-y-0">
+                            <label for="name" class="block text-sm font-medium text-gray-200 light-mode:text-gray-700">Name</label>
+                            <input type="text" name="id" id="name" class="mt-2 block w-full px-4 py-3 border rounded-lg shadow-sm bg-gray-700 light-mode:bg-white focus:border-cyan-400 light-mode:focus:border-magenta-500" placeholder="Your Name" required="required" aria-label="Name">
+                            <p class="error text-red-500 text-sm hidden">Name is required</p>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-200 light-mode:text-gray-700">Email</label>
+                            <input type="email" id="email" class="mt-2 block w-full px-4 py-3 border rounded-lg shadow-sm bg-gray-700 light-mode:bg-white focus:border-cyan-400 light-mode:focus:border-magenta-500" placeholder="Your Email" required="required" aria-label="Email">
+                            <p class="error text-red-500 text-sm hidden">Valid email is required</p>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-200 light-mode:text-gray-700">Message</label>
+                            <textarea id="message" rows="4" class="mt-2 block w-full px-4 py-3 border rounded-lg shadow-sm bg-gray-700 light-mode:bg-white focus:border-cyan-400 light-mode:focus:border-magenta-500" placeholder="Your Message" required="required" aria-label="Message"></textarea>
+                            <p class="error text-red-500 text-sm hidden">Message is required</p>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn bg-cyan-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-cyan-700 light-mode:bg-magenta-600 light-mode:hover:bg-magenta-700">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="flex justify-center space-x-8 mt-8">
+                    <a href="mailto:your.email@example.com" class="contact-icon text-cyan-600 light-mode:text-magenta-600" aria-label="Email"><i class="fas fa-envelope fa-lg"></i> Email</a>
+                    <a href="https://linkedin.com" class="contact-icon text-cyan-600 light-mode:text-magenta-600" aria-label="LinkedIn"><i class="fab fa-linkedin fa-lg"></i> LinkedIn</a>
+                    <a href="https://github.com" class="contact-icon text-cyan-600 light-mode:text-magenta-600" aria-label="GitHub"><i class="fab fa-github fa-lg"></i> GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-16" aria-label="Footer">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-lg">© 2025 Sajida Khan Balot. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#home" class="back-to-top" id="back-to-top" aria-label="Back to Top"><i class="fas fa-arrow-up"></i></a>
+
+    <script>
+        // Loader
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.classList.add('hidden');
+            }, 1000);
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                if (window.innerWidth <= 768) {
+                    toggleMobileMenu();
+                }
+            });
+        });
+
+        // GSAP Animations
+        gsap.utils.toArray('.fade-in').forEach(element => {
+            gsap.fromTo(element, 
+                { opacity: 0, y: 40 },
+                { 
+                    opacity: 1, 
+                    y: 0, 
+                    duration: 1, 
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: element,
+                        start: 'top 80%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        // Animated Header
+        gsap.from('.logo', { opacity: 0, x: -50, duration: 1, ease: 'power3.out' });
+        gsap.from('.nav-link', { 
+            opacity: 0, 
+            y: -20, 
+            duration: 0.8, 
+            stagger: 0.1, 
+            ease: 'power3.out',
+            delay: 0.5 
+        });
+
+        // Mobile Menu
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        function toggleMobileMenu() {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        }
+        hamburger.addEventListener('click', toggleMobileMenu);
+
+        // Typewriter Effect
+        const typewriter = document.querySelector('.typewriter');
+        const text = typewriter.getAttribute('data-text');
+        let index = 0;
+        function type() {
+            if (index < text.length) {
+                typewriter.textContent += text.charAt(index);
+                index++;
+                setTimeout(type, 80);
+            }
+        }
+        setTimeout(type, 1000);
+
+        // Back to Top
+        const backToTop = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('visible', window.scrollY > 300);
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            themeToggle.innerHTML = `<i class="fas ${document.body.classList.contains('light-mode') ? 'fa-moon' : 'fa-sun'}"></i>`;
+            localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+        });
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+
+        // Project Filter
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectItems = document.querySelectorAll('.project-item');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const filter = button.getAttribute('data-filter');
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                projectItems.forEach(item => {
+                    const category = item.getAttribute('data-category');
+                    gsap.to(item, {
+                        opacity: filter === 'all' || category === filter ? 1 : 0,
+                        scale: filter === 'all' || category === filter ? 1 : 0.8,
+                        duration: 0.5,
+                        ease: 'power2.out',
+                        onComplete: () => {
+                            item.style.display = filter === 'all' || category === filter ? 'block' : 'none';
+                        }
+                    });
+                });
+            });
+        });
+
+        // Testimonial Carousel
+        const carouselInner = document.querySelector('.carousel-inner');
+        const carouselDots = document.querySelectorAll('.carousel-dot');
+        let currentSlide = 0;
+        function updateCarousel() {
+            carouselInner.style.transform = `translateX(-${currentSlide * 100}%)`;
+            carouselDots.forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
+        }
+        carouselDots.forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                currentSlide = i;
+                updateCarousel();
+            });
+        });
+        let carouselInterval = setInterval(() => {
+            currentSlide = (currentSlide + 1) % carouselDots.length;
+            updateCarousel();
+        }, 5000);
+        carouselInner.parentElement.addEventListener('mouseenter', () => clearInterval(carouselInterval));
+        carouselInner.parentElement.addEventListener('mouseleave', () => {
+            carouselInterval = setInterval(() => {
+                currentSlide = (currentSlide + 1) % carouselDots.length;
+                updateCarousel();
+            }, 5000);
+        });
+
+        // Form Validation
+        const form = document.getElementById('contact-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let isValid = true;
+            ['name', 'email', 'message'].forEach(field => {
+                const input = document.getElementById(field);
+                const error = input.nextElementSibling;
+                if (!input.value.trim()) {
+                    error.classList.remove('hidden');
+                    isValid = false;
+                } else {
+                    error.classList.add('hidden');
+                }
+                if (field === 'email' && input.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
+                    error.textContent = 'Valid email is required';
+                    error.classList.remove('hidden');
+                    isValid = false;
+                }
+            });
+            if (isValid) {
+                alert('Form submitted! (Note: Backend integration required for actual submission)');
+                form.reset();
+            }
+        });
+
+        // Three.js 3D Starfield
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('three-canvas'), alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+        scene.add(ambientLight);
+        const pointLight = new THREE.PointLight(0x06B6D4, 0.8, 1000);
+        pointLight.position.set(0, 0, 10);
+        scene.add(pointLight);
+
+        const stars = new THREE.Group();
+        const starGeometry = new THREE.SphereGeometry(0.1, 16, 16);
+        const starMaterial = new THREE.MeshPhongMaterial({ 
+            color: 0x06B6D4, 
+            emissive: 0xEC4899, 
+            emissiveIntensity: 0.5,
+            transparent: true,
+            opacity: 0.8
+        });
+        for (let i = 0; i < 250; i++) {
+            const star = new THREE.Mesh(starGeometry, starMaterial);
+            const angle = Math.random() * Math.PI * 2;
+            const radius = 50 + Math.random() * 50;
+            star.position.set(
+                Math.cos(angle) * radius,
+                Math.sin(angle) * radius,
+                (Math.random() - 0.5) * 100
+            );
+            star.userData = {
+                velocity: new THREE.Vector3(0, 0, 0.05),
+                angle: angle,
+                radius: radius
+            };
+            star.scale.setScalar(Math.random() * 0.5 + 0.5);
+            stars.add(star);
+        }
+        scene.add(stars);
+
+        const ringGeometry = new THREE.RingGeometry(30, 30.2, 64);
+        const ringMaterial = new THREE.MeshBasicMaterial({ color: 0x06B6D4, side: THREE.DoubleSide, transparent: true, opacity: 0.2 });
+        const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+        ring.rotation.x = Math.PI / 2;
+        scene.add(ring);
+
+        camera.position.z = 50;
+
+        let mouseX = 0, mouseY = 0;
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+            mouseY = -(e.clientY / window.innerHeight - 0.5) * 2;
+        });
+
+        let scrollY = 0;
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                scrollY = window.scrollY / window.innerHeight;
+            }, 100);
+        });
+
+        function animateStarfield() {
+            requestAnimationFrame(animateStarfield);
+            stars.children.forEach(star => {
+                star.userData.angle += 0.01;
+                star.position.x = Math.cos(star.userData.angle) * star.userData.radius;
+                star.position.y = Math.sin(star.userData.angle) * star.userData.radius;
+                star.position.z += star.userData.velocity.z + scrollY * 0.1;
+                if (star.position.z > 100) star.position.z -= 200;
+            });
+            ring.rotation.z += 0.002;
+            camera.position.x += (mouseX * 20 - camera.position.x) * 0.05;
+            camera.position.y += (mouseY * 20 - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+            renderer.render(scene, camera);
+        }
+        animateStarfield();
+
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }, 100);
+        });
+
+        // Vanilla Tilt
+        VanillaTilt.init(document.querySelectorAll('.tilt'), {
+            max: 20,
+            speed: 400,
+            perspective: 1500,
+            glare: true,
+            'max-glare': 0.7
+        });
+
+        // Keyboard Accessibility
+        document.querySelectorAll('a, button, input, textarea').forEach(el => {
+            el.addEventListener('focus', () => el.classList.add('ring-2', 'ring-cyan-400', 'light-mode:ring-magenta-500'));
+            el.addEventListener('blur', () => el.classList.remove('ring-2', 'ring-cyan-400', 'light-mode:ring-magenta-500'));
+        });
+    </script>
 </body>
 </html>
